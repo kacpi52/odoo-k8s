@@ -21,19 +21,47 @@ template:
       env:
       # service name like docker compose network and container name ?  
       - name: ODOO_DATABASE_HOST
-        value: "postgresql-svc.odoo.svc.cluster.local"
+        valueFrom:
+          configMapKeyRef:
+            name: odoo-configmap
+            key: db_host
+
       - name: ODOO_DATABASE_PORT_NUMBER
-        value: "5432"
+        valueFrom:
+          configMapKeyRef:
+            name: odoo-configmap
+            key: db_port
+
       - name: ODOO_DATABASE_NAME
-        value: "bitnami_odoo"
+        valueFrom:
+          configMapKeyRef:
+            name: odoo-configmap
+            key: db_name
+
       - name: ODOO_DATABASE_USER
-        value: "bn_odoo"
+        valueFrom:
+          configMapKeyRef:
+            name: odoo-configmap
+            key: db_user
+
       - name: ODOO_DATABASE_PASSWORD
-        value: "mypassword"
+        valueFrom:
+          secretKeyRef:
+            name: odoo-secret
+            key: DB_PASSWORD
+
       - name: ODOO_EMAIL
-        value: "user@example.com"
+        valueFrom:
+          configMapKeyRef:
+            name: odoo-configmap
+            key: oddo_email
+
       - name: ODOO_PASSWORD
-        value: "bitnami"
+        valueFrom:
+          secretKeyRef:
+            name: odoo-secret
+            key: ODDO_PASSWORD
+
       volumeMounts:
       - name: odoo-data
         mountPath: /bitnami/odoo
