@@ -15,10 +15,29 @@ template:
   spec:
     containers:
     - name: odoo-app
-    # check image path 
+      # check image path 
       image: docker.io/bitnami/odoo:16
+      # port? in doc ODOO_PORT_NUMBER 8069  
       ports:
-        - containerPort: 80
+      - containerPort: 80
       env:
-        - name: ODOO_DATABASE_HOST
-          value:
+      - name: ODOO_DATABASE_HOST
+        value: postgres
+      - name: ODOO_DATABASE_PORT_NUMBER
+        value: 5432
+      - name: ODOO_DATABASE_NAME
+        value: bitnami_odoo
+      - name: ODOO_DATABASE_USER
+        value: bn_odoo
+      - name: ODOO_DATABASE_PASSWORD
+        value: mypassword
+      - name: ODOO_EMAIL
+        value: user@example.com
+      - name: ODOO_PASSWORD
+        value: bitnami
+      volumeMounts:
+      - name: odoo-data
+        mountPath: /bitnami/odoo
+    volumes:
+    - name: odoo-data
+      emptyDir: {}
