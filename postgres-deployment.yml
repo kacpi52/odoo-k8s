@@ -20,11 +20,11 @@ spec:
             - containerPort: 5432
           env:
             - name: POSTGRESQL_DATABASE
-              value: odoo_pg
+              value: bitnami_odoo
             - name: POSTGRESQL_PASSWORD
               value: mypassword
             - name: POSTGRESQL_USERNAME
-              value: admin
+              value: bn_odoo
           volumeMounts:
             - name: postgres-storage
               mountPath: /bitnami/postgresql
