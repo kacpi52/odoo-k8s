@@ -1,40 +1,39 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: odoo-deployment
+  name: odoo-app-deployment
   namespace: odoo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: odoo-deployment
+      app: odoo-app-deployment
 template:
   metadata:
     labels:
-      app: odoo-deployment
+      app: odoo-app-deployment
   spec:
     containers:
     - name: odoo-app
-      # check image path 
       image: docker.io/bitnami/odoo:16
-      # port? in doc ODOO_PORT_NUMBER 8069  
       ports:
-      - containerPort: 80
+      - containerPort: 8069
       env:
+      # service name like docker compose network and container name ?  
       - name: ODOO_DATABASE_HOST
-        value: postgres
+        value: "postgresql-svc.odoo.svc.cluster.local"
       - name: ODOO_DATABASE_PORT_NUMBER
-        value: 5432
+        value: "5432"
       - name: ODOO_DATABASE_NAME
-        value: bitnami_odoo
+        value: "bitnami_odoo"
       - name: ODOO_DATABASE_USER
-        value: bn_odoo
+        value: "bn_odoo"
       - name: ODOO_DATABASE_PASSWORD
-        value: mypassword
+        value: "mypassword"
       - name: ODOO_EMAIL
-        value: user@example.com
+        value: "user@example.com"
       - name: ODOO_PASSWORD
-        value: bitnami
+        value: "bitnami"
       volumeMounts:
       - name: odoo-data
         mountPath: /bitnami/odoo
