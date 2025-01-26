@@ -18,8 +18,7 @@ template:
       image: docker.io/bitnami/odoo:16
       ports:
       - containerPort: 8069
-      env:
-      # service name like docker compose network and container name ?  
+      env: 
       - name: ODOO_DATABASE_HOST
         valueFrom:
           configMapKeyRef:
