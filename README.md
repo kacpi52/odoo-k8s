@@ -9,7 +9,10 @@ commands :
 kubectl create namespace odoo
 kubectl apply -f odoo-configmap.yml -n odoo
 kubectl apply -f odoo-secret.yml -n odoo
-kubectl apply -f odoo-deployment.yml -n odoo .... dalsze deploymenty itd
+kubectl apply -f odoo-deployment.yml  
+kubectl apply -f odoo-service.yml
+kubectl apply -f postgres-deployment.yml 
+kubectl apply -f postgres-service.yml 
 
 install ingress nginx controller :
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
@@ -26,3 +29,9 @@ and select the value from ADDRESS and paste it in your browser
 odoo app credentials:
  email: user@example.com
  password: bitnami
+
+dont forget to cleanup :
+kubectl delete -f ingress.yml 
+kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
+kubectl delete -f postgres-deployment.yml -f odoo-deployment.yml  
+kubectl delete -f odoo-service.yml -f postgres-service.yml 
