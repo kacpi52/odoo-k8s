@@ -8,62 +8,62 @@ spec:
   selector:
     matchLabels:
       app: odoo-app-deployment
-template:
-  metadata:
-    labels:
-      app: odoo-app-deployment
-  spec:
-    containers:
-    - name: odoo-app
-      image: docker.io/bitnami/odoo:16
-      ports:
-      - containerPort: 8069
-      env: 
-      - name: ODOO_DATABASE_HOST
-        valueFrom:
-          configMapKeyRef:
-            name: odoo-configmap
-            key: db_host
+  template:  
+    metadata:
+      labels:
+        app: odoo-app-deployment
+    spec:
+      containers:
+      - name: odoo-app
+        image: docker.io/bitnami/odoo:16
+        ports:
+        - containerPort: 8069
+        env: 
+        - name: ODOO_DATABASE_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: odoo-configmap
+              key: db_host
 
-      - name: ODOO_DATABASE_PORT_NUMBER
-        valueFrom:
-          configMapKeyRef:
-            name: odoo-configmap
-            key: db_port
+        - name: ODOO_DATABASE_PORT_NUMBER
+          valueFrom:
+            configMapKeyRef:
+              name: odoo-configmap
+              key: db_port
 
-      - name: ODOO_DATABASE_NAME
-        valueFrom:
-          configMapKeyRef:
-            name: odoo-configmap
-            key: db_name
+        - name: ODOO_DATABASE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: odoo-configmap
+              key: db_name
 
-      - name: ODOO_DATABASE_USER
-        valueFrom:
-          configMapKeyRef:
-            name: odoo-configmap
-            key: db_user
+        - name: ODOO_DATABASE_USER
+          valueFrom:
+            configMapKeyRef:
+              name: odoo-configmap
+              key: db_user
 
-      - name: ODOO_DATABASE_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: odoo-secret
-            key: DB_PASSWORD
+        - name: ODOO_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: odoo-secret
+              key: DB_PASSWORD
 
-      - name: ODOO_EMAIL
-        valueFrom:
-          configMapKeyRef:
-            name: odoo-configmap
-            key: oddo_email
+        - name: ODOO_EMAIL
+          valueFrom:
+            configMapKeyRef:
+              name: odoo-configmap
+              key: oddo_email
 
-      - name: ODOO_PASSWORD
-        valueFrom:
-          secretKeyRef:
-            name: odoo-secret
-            key: ODDO_PASSWORD
+        - name: ODOO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: odoo-secret
+              key: ODDO_PASSWORD
 
-      volumeMounts:
+        volumeMounts:
+        - name: odoo-data
+          mountPath: /bitnami/odoo
+      volumes:
       - name: odoo-data
-        mountPath: /bitnami/odoo
-    volumes:
-    - name: odoo-data
-      emptyDir: {}
+        emptyDir: {}
