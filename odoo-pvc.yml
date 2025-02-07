@@ -4,7 +4,7 @@ metadata:
   name: odoo-pvc
   namespace: odoo
 spec:
-  storageClassName: "storage_class_name" # check storage class name in your cluster
+  storageClassName: # standard-rwo # standard-rwo is default - so its possible that we dont need to pass its name - test it !! 
   accessModes:
   - ReadWriteOnce
   resources:
