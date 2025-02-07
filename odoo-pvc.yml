@@ -3,3 +3,10 @@ kind: PersistentVolumeClaim
 metadata:
   name: odoo-pvc
   namespace: odoo
+spec:
+  storageClassName: "storage_class_name" # check storage class name in your cluster
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi

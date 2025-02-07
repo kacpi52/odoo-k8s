@@ -66,4 +66,5 @@ spec:
           mountPath: /bitnami/odoo
       volumes:
       - name: odoo-data
-        emptyDir: {}
+        persistentVolumeClaim:
+          claimName: odoo-pvc
