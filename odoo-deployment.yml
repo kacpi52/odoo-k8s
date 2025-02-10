@@ -8,6 +8,13 @@ spec:
   selector:
     matchLabels:
       app: odoo-app-deployment
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+      
   template:  
     metadata:
       labels:
@@ -64,6 +71,15 @@ spec:
         volumeMounts:
         - name: odoo-data
           mountPath: /bitnami/odoo
+
+        resources:
+        limits:
+          cpu: "1"
+          memory: "1Gi"
+        requests:
+          cpu: "500m"
+          memory: "512Mi"
+
       volumes:
       - name: odoo-data
         persistentVolumeClaim:
