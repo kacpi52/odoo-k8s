@@ -12,7 +12,7 @@ gcloud container clusters get-credentials <your_cluster_name> --zone <your_zone_
 
 ``` 
 
-### Then run commands :
+#### Then run commands :
 
 ```
 kubectl create namespace odoo
@@ -24,7 +24,7 @@ kubectl apply -f odoo-pvc.yml
 kubectl apply -f postgres-deployment.yml 
 kubectl apply -f postgres-service.yml 
 ```
-### Then install ingress nginx controller :
+#### Then install ingress nginx controller :
 ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.5.1/deploy/static/provider/cloud/deploy.yaml
 ```
@@ -41,13 +41,13 @@ kubectl apply -f ingress.yml
 
 #### Then type and select the value from ADDRESS and paste it in your browser 
 ```
-kubectl get ingress
+kubectl get ingress -n odoo
 ``` 
-
-
+![cli](images/ingress_04_cli.jpg)
+![public ip](images/ingress_04_working_app.jpg)
 #### Odoo app default credentials:
- email: user@example.com
- password: bitnami
+ - email: user@example.com
+ - password: bitnami
 
 ## Dont forget to cleanup :
 
