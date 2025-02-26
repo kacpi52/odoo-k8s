@@ -1,7 +1,11 @@
 # odoo-k8s
-Oddo app runned with kubernetes using GCP kubernetes engine  (GKE) and GCP persistent disk
+Oddo app runned with kubernetes using GCP kubernetes engine  (GKE) and GCP persistent disk, you can also run it on Oracle Cloud Infrastructure
 
-## How to run this project: 
+## How to run this project in Google Cloud Platform GCP :
+
+```
+cd gcp
+```
 
 - login and auth to google cli 
 - connect to your gcp k8s cluster:
@@ -57,6 +61,17 @@ kubectl delete -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/con
 kubectl delete -f postgres-deployment.yml -f odoo-deployment.yml  
 kubectl delete -f odoo-service.yml -f postgres-service.yml -f odoo-pvc.yml
 ```
+## How to run this project in Oracle Cloud Infrastructure OCI :
+
+```
+cd gcp
+```
+
+- login and auth to oracle cli 
+- connect to your oracle k8s cluster :
+```
+ oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.eu-frankfurt-1.XXXXXXX --file $HOME/.kube/config --region eu-frankfurt-1 --token-version 2.0.0  --kube-endpoint PUBLIC_ENDPOINT
+ ```
 
 #### Section Notes and Resources
 This project contains open source Odoo app image (https://github.com/odoo/odoo). 
